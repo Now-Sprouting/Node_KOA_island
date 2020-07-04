@@ -5,6 +5,11 @@ const catchError = async (ctx, next) => {
     try {
         await next()
     } catch (error) {
+        // 不同环境下是否提示报错信息
+        if(global.config.enviroment === 'dev'){
+            throw error
+        }
+        // 处理已知异常
        if(error instanceof HttpException){
            ctx.body = {
                msg:error.msg,
@@ -12,7 +17,16 @@ const catchError = async (ctx, next) => {
                request:`${ctx.method} ${ctx.path}`
            }
            ctx.status = error.code
-       }
+        }
+        // 处理未知异常(服务器异常)
+        else{
+            ctx.body = {
+                msg:"we made a mistake 0(n_n)0~~",
+                error_code:999,
+                request:`${ctx.method} ${ctx.path}`
+            }
+            ctx.status = 500
+        }
     }
 }
 module.exports = catchError

@@ -6,6 +6,12 @@ class InitManager {
         // 入口方法
         InitManager.app = app
         InitManager.initLoadRouters()
+        InitManager.loadConfig()
+    }
+    static loadConfig(path = ''){
+        const confugPath = path || `${process.cwd()}/config/config.js`
+        const config = require(confugPath)
+        global.config = config
     }
     // require-directory模块解决频繁导入(require)和注册(use)的问题
     static initLoadRouters(){
