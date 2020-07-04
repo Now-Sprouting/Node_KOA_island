@@ -9,8 +9,8 @@ class InitManager {
         InitManager.loadConfig()
     }
     static loadConfig(path = ''){
-        const confugPath = path || `${process.cwd()}/config/config.js`
-        const config = require(confugPath)
+        const configPath = path || `${process.cwd()}/config/config.js`
+        const config = require(configPath)
         global.config = config
     }
     // require-directory模块解决频繁导入(require)和注册(use)的问题

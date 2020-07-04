@@ -6,11 +6,13 @@ const catchError = async (ctx, next) => {
         await next()
     } catch (error) {
         // 不同环境下是否提示报错信息
-        if(global.config.enviroment === 'dev'){
+        const isHttpExecption = error instanceof HttpException
+        const isDev = global.config.enviroment === 'dev'
+        if(isDev && !isHttpExecption){
             throw error
         }
         // 处理已知异常
-       if(error instanceof HttpException){
+       if(isHttpExecption){
            ctx.body = {
                msg:error.msg,
                error_code:error.errorCode,
