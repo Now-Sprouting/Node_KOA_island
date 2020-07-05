@@ -22,13 +22,13 @@ const sequelize = new Sequelize(dbName, user, password, {
         // 日期字段重命名
         createdAt:'create_at',
         updatedAt:'update_at',
-        deletedAt:'delete_at',
+        deletedAt:'delete_',
         underscored:true
     }
 })
 
 sequelize.sync({
-    force: true
+    force: false
 })
 
 module.exports = {

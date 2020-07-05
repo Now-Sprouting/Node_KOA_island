@@ -7,6 +7,7 @@ class InitManager {
         InitManager.app = app
         InitManager.initLoadRouters()
         InitManager.loadConfig()
+        InitManager.loadHttpException()
     }
     static loadConfig(path = ''){
         const configPath = path || `${process.cwd()}/config/config.js`
@@ -25,6 +26,10 @@ class InitManager {
                 InitManager.app.use(obj.routes())
             }
         }
+    }
+    static loadHttpException(){
+        const errors = require('./http-exception')
+        global.errs = errors
     }
 }
 module.exports = InitManager
