@@ -43,6 +43,18 @@ class Auth {
             await next()
         }
     }
+    // 校验小程序 token
+    static verifyToken(token){
+        try{
+            jwt.verify(token, 
+                global.config.security.secretKey)
+            return true
+        }
+        catch (error){
+            return false
+        }
+
+    }
 }
 module.exports = {
     Auth

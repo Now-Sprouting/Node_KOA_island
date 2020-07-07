@@ -74,4 +74,15 @@ class TokenValidator extends LinValidator {
         }
     }
 }
-module.exports = { PositiveIntergerValidator, RegisterValidator, TokenValidator }
+// 微信小程序 token 校验
+class NotEmptyValidator extends LinValidator {
+    constructor() {
+        super()
+        this.token = [
+            new Rule('isLength', '不允许为空', {
+                min: 1
+            })
+        ]
+    }
+}
+module.exports = { PositiveIntergerValidator, RegisterValidator, TokenValidator ,NotEmptyValidator}
